@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3494e6, #ec6ead);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            text-align: center;
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #result {
+            font-weight: bold;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3494e6, #ec6ead);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>BMI Calculator</h1>
+        <input type="number" id="weight" placeholder="Weight (kg)">
+        <input type="number" id="height" placeholder="Height">
+        <select id="unit">
+            <option value="m">meters (m)</option>
+            <option value="cm">centimeters (cm)</option>
+        </select>
+        <button onclick="calculateBMI()">Calculate BMI</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value);
+            const unit = document.getElementById("unit").value;
+
+            if (!isNaN(weight) && !isNaN(height)) {
+                if (unit === "cm") {
+                    // Convert height from cm to m
+                    height = height / 100;
+                }
+
+                if (height > 0) {
+                    const bmi = weight / (height * height);
+                    const resultElement = document.getElementById("result");
+                    resultElement.innerHTML = `Your BMI is: ${bmi.toFixed(2)}`;
+                    resultElement.style.animation = "fadeIn 0.5s ease-in-out";
+                } else {
+                    alert("Please enter a valid height.");
+                }
+            } else {
+                alert("Please enter valid weight and height values.");
+            }
+        }
+    </script>
+</body>
+</html>
